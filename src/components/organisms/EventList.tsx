@@ -41,7 +41,7 @@ export default function EventList() {
   };
 
   return (
-    <Card title="Event List" className="w-1/5 text-center">
+    <Card title="Event List" className="w-1/2 text-center">
       <ul className="flex flex-col gap-4">
         {events.map((event) => (
           <li className="bg-gray-700 flex flex-row gap-4" key={event.id}>

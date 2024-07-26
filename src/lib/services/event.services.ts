@@ -1,4 +1,4 @@
-import api from './axios.instance'
+import api from './api.instance'
 
 interface CustomEvent {
     name: string;

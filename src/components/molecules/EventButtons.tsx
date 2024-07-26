@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Button from '../atoms/Button';
 import { updateEvent, deleteEvent } from '@/lib/services/event.services';
+import Input from '../atoms/Input';
 
 interface EventButtonsProps {
     eventId: any;
@@ -45,18 +46,18 @@ export default function EventButtons({ eventId, eventData, onUpdate, onDelete }:
     return (
         <div>
             {isEditing ? (
-                <>
+                <div className='flex flex-row flex-wrap gap-4 mt-2'>
                     <Button onClick={handleSave} variant='secondary'>Save</Button>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} />
-                    <input type="date" name="date" value={formData.date} onChange={handleChange} />
-                    <input type="text" name="location" value={formData.location} onChange={handleChange} />
-                    <input type="text" name="description" value={formData.description} onChange={handleChange} />
-                </>
+                    <Input type="text" name="name" value={formData.name} onChange={handleChange} />
+                    <Input type="date" name="date" value={formData.date} onChange={handleChange} />
+                    <Input type="text" name="location" value={formData.location} onChange={handleChange} />
+                    <Input type="text" name="description" value={formData.description} onChange={handleChange} />
+                </div>
             ) : (
-                <>
+                <div className='flex flex-rox gap-4'>
                     <Button onClick={handleEdit} variant='secondary'>Edit</Button>
                     <Button onClick={handleDelete} variant='tertiary'>Delete</Button>
-                </>
+                </div>
             )}
         </div>
     );

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Card from "../atoms/Card";
 import Form from "../molecules/Form";
 import { addEvent } from '@/lib/services/event.services';
+import { getAddress } from '@/lib/services/address.services';
 
 // Define a custom type for event data
 interface CustomEvent {
@@ -29,9 +30,23 @@ export default function EventForm() {
         description: ''
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [suggestions, setSuggestions] = useState<string[]>([]);
+
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    
+        if (name === "location" && value.length > 6) {
+            try {
+                const response = await getAddress(value);
+                const formattedSuggestions = response.features.map((feature: any) => feature.properties.label);
+                setSuggestions(formattedSuggestions);
+            } catch (error) {
+                console.error("Error fetching address suggestions:", error);
+            }
+        } else {
+            setSuggestions([]);
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -46,7 +61,20 @@ export default function EventForm() {
 
     return (
         <Card title="Create Event" className="w-1/5 text-center">
-            <Form className="flex flex-col gap-4" fields={fields} formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
+            <Form
+                className="flex flex-col gap-4"
+                fields={fields}
+                formData={formData}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+            />
+            <ul>
+                {suggestions.map((suggestion, index) => (
+                    <li key={index} onClick={() => setFormData({ ...formData, location: suggestion })}>
+                        {suggestion}
+                    </li>
+                ))}
+            </ul>
         </Card>
     );
 }
