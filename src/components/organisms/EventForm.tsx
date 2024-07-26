@@ -1,7 +1,18 @@
 "use client"
 import { useState } from 'react';
+
 import Card from "../atoms/Card";
 import Form from "../molecules/Form";
+import { addEvent } from '@/lib/services/event.services';
+
+// Define a custom type for event data
+interface CustomEvent {
+    name: string;
+    date: string;
+    location: string;
+    description: string;
+    [key: string]: string; // Add this line to include an index signature
+}
 
 export default function EventForm() {
     const fields = [
@@ -11,18 +22,26 @@ export default function EventForm() {
         { name: 'description', type: 'text', placeholder: 'Event Description' },
     ];
 
-    const [formData, setFormData] = useState(
-        fields.reduce((acc, field) => ({ ...acc, [field.name]: '' }), {})
-    );
+    const [formData, setFormData] = useState<CustomEvent>({
+        name: '',
+        date: '',
+        location: '',
+        description: ''
+    });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Form Data:', formData);
+        try {
+            await addEvent(formData);
+            console.log('Event created:', formData);
+        } catch (error) {
+            console.error('Error creating event:', error);
+        }
     };
 
     return (
