@@ -1,18 +1,11 @@
 {
   "events": [
     {
-      "name": "evento",
+      "name": "Pagode do Françês",
       "date": "2024-08-04",
-      "location": "paris",
-      "description": "021",
-      "id": 2
-    },
-    {
-      "name": "test",
-      "date": "2024-07-28",
-      "location": "testa",
-      "description": "testt",
-      "id": 3
+      "location": "Avenue Gustave Eiffel, 75007, Paris",
+      "description": "Pagode até o amanhecer !",
+      "id": 1
     }
   ]
 }

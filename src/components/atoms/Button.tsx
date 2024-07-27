@@ -9,9 +9,9 @@ interface ButtonProps {
 export default function Button({ variant, children, onClick }: ButtonProps) {
     const baseStyle = 'px-4 py-2 font-semibold rounded';
     const styles = {
-        primary: `${baseStyle} bg-blue-500 text-white hover:bg-blue-700`,
-        secondary: `${baseStyle} bg-gray-500 text-white hover:bg-green-700`,
-        tertiary: `${baseStyle} bg-green-500 text-white hover:bg-red-700`,
+        primary: `${baseStyle} bg-gray-500 text-white hover:bg-gray-700`,
+        secondary: `${baseStyle} bg-green-500 text-white hover:bg-green-700`,
+        tertiary: `${baseStyle} bg-red-500 text-white hover:bg-red-700`,
     };
 
     return (

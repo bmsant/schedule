@@ -12,7 +12,22 @@ interface Event {
   description: string;
 }
 
-export default function EventList() {
+interface EventListProps {
+  eventId: any;
+  eventData: any;
+  onUpdate: (updatedEvent: any) => void;
+  onDelete: () => void;
+}
+
+
+export default function EventList({
+  eventId,
+  eventData,
+  onUpdate,
+  onDelete,
+}: EventListProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState(eventData);
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
@@ -27,6 +42,7 @@ export default function EventList() {
 
     fetchEvents();
   }, []);
+  
 
   const handleUpdate = (updatedEvent: any) => {
     setEvents(
