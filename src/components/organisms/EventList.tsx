@@ -1,8 +1,10 @@
+// src/components/EventList.tsx
 "use client";
 import { useEffect, useState } from "react";
 import { getAllEvents } from "@/lib/services/event.services";
 import Card from "../atoms/Card";
-import EventButtons from "../molecules/EventButtons";
+// import EventButtons from "../molecules/EventButtons";
+import IconButton from "../atoms/IconButton";
 
 interface Event {
   id: number;
@@ -12,22 +14,16 @@ interface Event {
   description: string;
 }
 
-interface EventListProps {
-  eventId: any;
-  eventData: any;
-  onUpdate: (updatedEvent: any) => void;
-  onDelete: () => void;
-}
+// interface EventListProps {
+//   eventId: any;
+//   eventData: any;
+//   onUpdate: (updatedEvent: any) => void;
+//   onDelete: () => void;
+// }
 
-
-export default function EventList({
-  eventId,
-  eventData,
-  onUpdate,
-  onDelete,
-}: EventListProps) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState(eventData);
+export default function EventList() {
+  // const [isEditing, setIsEditing] = useState(false);
+  // const [formData, setFormData] = useState(eventData);
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
@@ -42,35 +38,49 @@ export default function EventList({
 
     fetchEvents();
   }, []);
-  
 
-  const handleUpdate = (updatedEvent: any) => {
-    setEvents(
-      events.map((event) =>
-        event.id === updatedEvent.id ? updatedEvent : event
-      )
-    );
-  };
+  // const handleUpdate = (updatedEvent: any) => {
+  //   setEvents(
+  //     events.map((event) =>
+  //       event.id === updatedEvent.id ? updatedEvent : event
+  //     )
+  //   );
+  // };
 
-  const handleDelete = (id: number) => {
-    setEvents(events.filter((event) => event.id !== id));
+  // const handleDelete = (id: number) => {
+  //   setEvents(events.filter((event) => event.id !== id));
+  // };
+
+  const [visibleDescriptionId, setVisibleDescriptionId] = useState<
+    number | null
+  >(null);
+
+  const toggleDescription = (id: number) => {
+    setVisibleDescriptionId(visibleDescriptionId === id ? null : id);
   };
 
   return (
-    <Card title="Event List" className="w-1/2 text-center">
-      <ul className="flex flex-col gap-4">
+    <Card title="Schedule" className="w-[900px] h-full">
+      <ul className="w-full flex flex-col gap-4">
         {events.map((event) => (
-          <li className="bg-gray-700 flex flex-row gap-4" key={event.id}>
-            <h2>{event.name}</h2>
-            <p>{event.date}</p>
-            <p>{event.location}</p>
-            <p>{event.description}</p>
-            <EventButtons
-              eventId={event.id}
-              eventData={event}
-              onUpdate={handleUpdate}
-              onDelete={() => handleDelete(event.id)}
-            />
+          <li className="bg-gray-700 p-2" key={event.id}>
+            <div className="flex flex-row items-center justify-between">
+              <h2 className="w-[220px] text-start pl-8">{event.name}</h2>
+              <p className="w-[220px] text-center">{event.date}</p>
+              <p className="w-[445px]" >{event.location}</p>
+              <IconButton
+                iconSrc={
+                  visibleDescriptionId === event.id
+                    ? "/icons/hide.svg"
+                    : "/icons/show.svg"
+                }
+                onClick={() => toggleDescription(event.id)}
+                className="flex justify-end"
+              />
+            </div>
+            {visibleDescriptionId === event.id && (
+              <p className="w-full p-4 bg-gray-600">{event.description}</p>
+            )}
           </li>
         ))}
       </ul>
