@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { getAllEvents } from "@/lib/services/event.services";
 import Card from "../atoms/Card";
-// import EventButtons from "../molecules/EventButtons";
-import IconButton from "../atoms/IconButton";
+import EventButtons from "../molecules/EventButtons";
 
 interface Event {
   id: number;
@@ -14,16 +13,12 @@ interface Event {
   description: string;
 }
 
-// interface EventListProps {
-//   eventId: any;
-//   eventData: any;
-//   onUpdate: (updatedEvent: any) => void;
-//   onDelete: () => void;
-// }
+interface EventListProps {
+  showButtons?: boolean;
+  isAdmin: boolean;
+}
 
-export default function EventList() {
-  // const [isEditing, setIsEditing] = useState(false);
-  // const [formData, setFormData] = useState(eventData);
+export default function EventList({ showButtons = false, isAdmin }: EventListProps) {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
@@ -39,24 +34,16 @@ export default function EventList() {
     fetchEvents();
   }, []);
 
-  // const handleUpdate = (updatedEvent: any) => {
-  //   setEvents(
-  //     events.map((event) =>
-  //       event.id === updatedEvent.id ? updatedEvent : event
-  //     )
-  //   );
-  // };
+  const handleUpdate = (updatedEvent: any) => {
+    setEvents(
+      events.map((event) =>
+        event.id === updatedEvent.id ? updatedEvent : event
+      )
+    );
+  };
 
-  // const handleDelete = (id: number) => {
-  //   setEvents(events.filter((event) => event.id !== id));
-  // };
-
-  const [visibleDescriptionId, setVisibleDescriptionId] = useState<
-    number | null
-  >(null);
-
-  const toggleDescription = (id: number) => {
-    setVisibleDescriptionId(visibleDescriptionId === id ? null : id);
+  const handleDelete = (id: number) => {
+    setEvents(events.filter((event) => event.id !== id));
   };
 
   return (
@@ -67,20 +54,15 @@ export default function EventList() {
             <div className="flex flex-row items-center justify-between">
               <h2 className="w-[220px] text-start pl-8">{event.name}</h2>
               <p className="w-[220px] text-center">{event.date}</p>
-              <p className="w-[445px]" >{event.location}</p>
-              <IconButton
-                iconSrc={
-                  visibleDescriptionId === event.id
-                    ? "/icons/hide.svg"
-                    : "/icons/show.svg"
-                }
-                onClick={() => toggleDescription(event.id)}
-                className="flex justify-end"
+              <p className="w-[445px]">{event.location}</p>
+              <EventButtons
+                eventId={event.id}
+                eventData={event}
+                onUpdate={handleUpdate}
+                onDelete={() => handleDelete(event.id)}
+                isAdmin={isAdmin}
               />
             </div>
-            {visibleDescriptionId === event.id && (
-              <p className="w-full p-4 bg-gray-600">{event.description}</p>
-            )}
           </li>
         ))}
       </ul>
