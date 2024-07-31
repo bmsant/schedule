@@ -20,6 +20,13 @@
       "location": "Rue Paul Vaillant-Couturier, 92000, Nanterre",
       "description": "Churrasco, cerveja e muito pagode !",
       "id": 3
+    },
+    {
+      "name": "Grand Tablé",
+      "date": "2024-08-03",
+      "location": "Saumur, 49400, Saumur",
+      "description": "Esta rolando !",
+      "id": 4
     }
   ]
 }

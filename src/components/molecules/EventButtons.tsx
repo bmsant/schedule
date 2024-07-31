@@ -21,7 +21,6 @@ export default function EventButtons({
 }: EventButtonsProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(eventData);
-  const [showDescription, setShowDescription] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -56,52 +55,38 @@ export default function EventButtons({
     setFormData({ ...formData, [name]: value });
   };
 
-  const toggleDescription = () => {
-    setShowDescription(!showDescription);
-  };
+  if (!isAdmin) {
+    return null;
+  }
 
   return (
-    <div>
-      <div className="flex flex-row gap-4">
-        <IconButton
-          iconSrc={showDescription ? "/icons/hide.svg" : "/icons/show.svg"}
-          onClick={toggleDescription}
-          className="flex justify-end"
-        />
-        {isAdmin && (
-          <>
-            {isEditing ? (
-              <>
-                <IconButton
-                  iconSrc="/icons/save.svg"
-                  onClick={handleSave}
-                  className="flex justify-end"
-                />
-                <IconButton
-                  iconSrc="/icons/hide.svg"
-                  onClick={handleCancel}
-                  className="flex justify-end"
-                />
-              </>
-            ) : (
-              <>
-                <IconButton
-                  iconSrc="/icons/edit.svg"
-                  onClick={handleEdit}
-                  className="flex justify-end"
-                />
-                <IconButton
-                  iconSrc="/icons/delete.svg"
-                  onClick={handleDelete}
-                  className="flex justify-end"
-                />
-              </>
-            )}
-          </>
-        )}
-      </div>
-      {showDescription && (
-        <p className="flex flex-auto w-[445px] p-4 bg-gray-600">{eventData.description}</p>
+    <div className="flex flex-row gap-4">
+      {isEditing ? (
+        <>
+          <IconButton
+            iconSrc="/icons/save.svg"
+            onClick={handleSave}
+            className="flex justify-end"
+          />
+          <IconButton
+            iconSrc="/icons/hide.svg"
+            onClick={handleCancel}
+            className="flex justify-end"
+          />
+        </>
+      ) : (
+        <>
+          <IconButton
+            iconSrc="/icons/edit.svg"
+            onClick={handleEdit}
+            className="flex justify-end size-14"
+          />
+          <IconButton
+            iconSrc="/icons/delete.svg"
+            onClick={handleDelete}
+            className="flex justify-end size-14"
+          />
+        </>
       )}
       {isEditing && (
         <div className="flex flex-row flex-wrap gap-4 mt-2">
