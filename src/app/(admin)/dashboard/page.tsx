@@ -8,9 +8,6 @@ export default function DashboardPage() {
         <section className="flex gap-4 justify-center">
             <EventList isAdmin={true} showButtons={true} />
             <EventForm />
-        </section>
-        <section className="flex gap-4 justify-center">
-            <Artists />
             <ArtistForm />
         </section>
         </div>

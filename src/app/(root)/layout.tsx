@@ -26,21 +26,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
       >
-        <nav className="bg-gray-800 p-4 flex justify-between items-center">
-          <div className="text-white text-lg">Paris021</div>
-          <div className="flex gap-4">
-            <a href="/" className="text-white">
-              Home
-            </a>
-            <a href="/dashboard" className="text-white">
-              Dashboard
-            </a>
-          </div>
-        </nav>
         <header className="text-center my-4">
-          <h1 className="text-3xl font-bold">Background</h1>
+          <nav className="bg-gray-800 p-4 flex justify-between items-center">
+            <div className="text-white text-lg">Paris021</div>
+            <div className="flex gap-4">
+              <a href="/" className="text-white">
+                Home
+              </a>
+              <a href="/dashboard" className="text-white">
+                Dashboard
+              </a>
+            </div>
+          </nav>
         </header>
-        <main className="flex-1 flex flex-col items-center justify-center min-h-full">
+        <main className="flex-1 flex flex-col items-center justify-center min-h-svh">
           {children}
         </main>
         <footer className="bg-gray-800 p-4 text-center text-white">
