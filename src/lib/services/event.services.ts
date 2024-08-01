@@ -1,6 +1,6 @@
 import api from './api.instance'
 
-interface CustomEvent {
+interface Event {
     name: string;
     date: string;
     location: string;
@@ -19,7 +19,7 @@ export async function getAllEvents() {
 }
 
 //add event
-export async function addEvent(event: CustomEvent) {
+export async function addEvent(event: Event) {
   try {
     await api.post('/events', event)
   } catch (error) {

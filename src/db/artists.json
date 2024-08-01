@@ -1,0 +1,18 @@
+{
+  "artists": [
+    {
+      "name": "Allef",
+      "location": "Rio de Janeiro",
+      "role": "Cantor, Compositor",
+      "description": "Testando, testado, testador",
+      "id": 1
+    },
+    {
+      "name": "Test",
+      "location": "Bahia",
+      "role": "Dançarino",
+      "description": "Testando, testado, testador",
+      "id": 2
+    }
+  ]
+}

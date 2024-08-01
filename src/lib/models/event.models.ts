@@ -4,8 +4,20 @@ import path from "path";
 const dbFilePath = path.resolve(process.cwd(), "src/db/events.json");
 
 export const getEvents = () => {
-  try {
+    try {
+    if (!fs.existsSync(dbFilePath)) {
+      fs.writeFileSync(
+        dbFilePath,
+        JSON.stringify({ events: [] }, null, 2),
+        "utf-8"
+      );
+    }
+
     const jsonData = fs.readFileSync(dbFilePath, "utf8");
+    if (!jsonData) {
+      return [];
+    }
+
     return JSON.parse(jsonData).events;
   } catch (error) {
     console.error("Error reading or parsing events.json:", error);
