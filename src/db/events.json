@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "name": "Pagode do Françês",
+      "date": "2024-08-04",
+      "location": "Avenue Gustave Eiffel, 75007, Paris",
+      "description": "Pagode até o amanhecer !",
+      "id": 1
+    },
+    {
+      "name": "Pagode no Morro",
+      "date": "2024-08-04",
+      "location": "Place de Paris, 69009, Lyon",
+      "description": "Muita musica brasileira e alegria !",
+      "id": 2
+    },
+    {
+      "name": "Festa na Laje",
+      "date": "2024-07-31",
+      "location": "Rue Paul Vaillant-Couturier, 92000, Nanterre",
+      "description": "Churrasco, cerveja e muito pagode !",
+      "id": 3
+    },
+    {
+      "name": "Grand Tablé",
+      "date": "2024-08-03",
+      "location": "Saumur, 49400, Saumur",
+      "description": "Esta rolando !",
+      "id": 4
+    }
+  ]
+}
