@@ -10,7 +10,7 @@ export default function List<T>({ items, renderItem, className }: ListProps<T>) 
   return (
     <ul className={`w-full flex flex-col gap-4 ${className}`}>
       {items.map((item, index) => (
-        <li key={index} >
+        <li className={className} key={index} >
           {renderItem(item, index)}
         </li>
       ))}
