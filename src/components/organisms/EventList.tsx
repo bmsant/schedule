@@ -17,6 +17,7 @@ interface Event {
 interface EventListProps {
   showButtons?: boolean;
   isAdmin: boolean;
+  className?: string;
 }
 
 export default function EventList({ showButtons = false, isAdmin }: EventListProps) {
@@ -80,7 +81,7 @@ export default function EventList({ showButtons = false, isAdmin }: EventListPro
   const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
 
   return (
-    <Card title="Schedule" className="w-full sm:w-[900px] h-full">
+    <Card className="bg-gray-800 w-1/2 h-full">
       <div className="flex flex-col sm:flex-row justify-between mb-4">
         <label htmlFor="search" className="sr-only">Search events</label>
         <input
@@ -92,6 +93,7 @@ export default function EventList({ showButtons = false, isAdmin }: EventListPro
           className="p-2 border border-gray-300 rounded w-full sm:w-auto mb-2 sm:mb-0"
           aria-label="Search events"
         />
+        <h1 className="text-3xl font-extrabold text-center">Schedule</h1>
         <button
           onClick={handleSort}
           className="p-2 border border-gray-300 rounded"
@@ -103,7 +105,7 @@ export default function EventList({ showButtons = false, isAdmin }: EventListPro
       <List
         items={paginatedEvents}
         renderItem={(event) => (
-          <div className="flex flex-col" role="listitem">
+          <div className="flex flex-col bg-gray-600 rounded-lg" role="listitem">
             <div className="flex flex-col sm:flex-row items-center justify-between">
               <h2 className="w-full sm:w-[220px] text-start pl-8">{event.name}</h2>
               <p className="w-full sm:w-[180px] text-center border-l-2 border-r-2 mx-4">{event.date}</p>
